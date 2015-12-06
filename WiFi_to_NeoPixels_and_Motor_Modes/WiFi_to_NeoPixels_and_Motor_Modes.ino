@@ -14,17 +14,26 @@ bool getNewData=false; //A flag that stops animated display modes in order to ge
 bool allowModeChange;  //A flag to show that we should allow a mode change
 int modeNumberToUse;  //The last display mode received
  
+int ledPin_12 = 12;  // Vibrating Motor connected to digital pin 12
+int ledPin_13 = 13;  // Vibrating Motor connected to digital pin 13     
+
+//***************Set Outputs************************//
+
+
 NeoPixelBus strip_04 = NeoPixelBus(pixelCount, 04);  //GPIO 4 Note 4 and 5 have their markings swapped on the vertical break out board
 NeoPixelBus strip_05 = NeoPixelBus(pixelCount, 05); 
 NeoPixelBus strip_15 = NeoPixelBus(pixelCount, 15); 
 NeoPixelBus strip_02 = NeoPixelBus(pixelCount, 02);
 NeoPixelBus strip_14 = NeoPixelBus(pixelCount, 14);
 
-int ledPin_12 = 12;  // Vibrating Motor connected to digital pin 12
-int ledPin_13 = 13;  // Vibrating Motor connected to digital pin 13                 
+//const char* ssid     = "Hippy-Laptop";
+//const char* password = "12345678";
 
-const char* ssid     = "Hippy-Apple";
-const char* password = "1wabcdiaatcws13";
+//const char* ssid     = "Hippy-Apple";
+//const char* password = "1wabcdiaatcws13";
+
+const char* ssid     = "Orange-21DF";
+const char* password = "429E5C7F";
 
 //Returns a form with a colour picker.  Not is use but handy for trying out colours
 const char* html = "<html><head><style></style></head>"
@@ -54,18 +63,18 @@ void setup() {
   Serial.print("LED Count : ");
   Serial.println(pixelCount);
     
-  strip_04.Begin();
-  strip_05.Begin();
-  strip_15.Begin();
-  strip_02.Begin();
-  strip_14.Begin(); 
-
-  pinMode(ledPin_12, OUTPUT);
-  pinMode(ledPin_13, OUTPUT);
  
 //***************WIFI client************************//
   WiFi.begin(ssid, password);
-  Serial.print("\n\r \n\rWorking to connect");
+  for (int i = 0; i < strlen(ssid); ++i) {
+    Serial.printf("%02x ", ssid[i]);
+    }
+    Serial.println("");
+
+  
+  Serial.print("\n\r \n\rWorking to connect to ");
+  
+  Serial.print(ssid);
   while (WiFi.status() != WL_CONNECTED) {
     delay(500);
     Serial.print(".");
@@ -79,6 +88,15 @@ void setup() {
   server.on("/", handle_command);             //root page
   server.begin();
   Serial.println("HTTP server started");
+
+pinMode(ledPin_12, OUTPUT);
+pinMode(ledPin_13, OUTPUT);
+
+  strip_04.Begin();
+  strip_05.Begin();
+  strip_15.Begin();
+  strip_02.Begin();
+  strip_14.Begin(); 
 
   //Flash LEDs to show connection made
   DebugLED(254,0,0);
