@@ -125,7 +125,6 @@ pinMode(ledPin_13, OUTPUT);
   DebugLED(0,0,254);
   delay(500);
   DebugLED(100,100,100);
-  delay(500);
 }
 
 void loop() {
@@ -142,38 +141,44 @@ void loop() {
      //Switch mode
      switch (modeNumberToUse) 
      {
+         case 0:
+          Set_Mode_000();
+          break;
         case 1:
-          Set_Mode_01();
+          Set_Mode_001();
           break;
         case 2:
-          Set_Mode_02();
+          Set_Mode_002();
           break;
         case 3:
-          Set_Mode_03();
+          Set_Mode_003();
           break;
         case 4:
-          Set_Mode_04();
+          Set_Mode_004();
           break;
         case 5:
-          Set_Mode_05();
+          Set_Mode_005();
           break;
         case 6:
-          Set_Mode_06();
+          Set_Mode_006();
           break;
         case 7:
-          Set_Mode_07();
+          Set_Mode_007();
           break;
         case 8:
-          Set_Mode_08();
+          Set_Mode_008();
           break;
         case 9:
-          Set_Mode_09();
+          Set_Mode_009();
           break;
         case 10:
-          Set_Mode_10();
+          Set_Mode_010();
           break;
         case 11:
-          Set_Mode_11();
+          Set_Mode_011();
+          break;
+        case 12:
+          Set_Mode_012();
           break;
     }
   }
@@ -229,21 +234,119 @@ void DebugLED(int red, int green, int blue) {
   strip_14.Show();
 }
 
-//All LEDs set to the same colour
+//Set each LED individually
+//Used to help define new modes although can be used as normal mode
+//LEDs are just ON.  No loops
+//There are 60 LEDS
+void Set_Mode_000() 
+{
+  Serial.println("In Mode_000");
+
+  int loopDelay = server.arg("loopdelay").toInt();
+  int strip = server.arg("Ring").toInt();
+
+  RgbColor rgbColorToUse_01 = CorrectedColour("colour_01");
+  RgbColor rgbColorToUse_02 = CorrectedColour("colour_02");
+  RgbColor rgbColorToUse_03 = CorrectedColour("colour_03");
+  RgbColor rgbColorToUse_04 = CorrectedColour("colour_04");
+  RgbColor rgbColorToUse_05 = CorrectedColour("colour_05");
+  RgbColor rgbColorToUse_06 = CorrectedColour("colour_06");
+  RgbColor rgbColorToUse_07 = CorrectedColour("colour_07");
+  RgbColor rgbColorToUse_08 = CorrectedColour("colour_08");
+  RgbColor rgbColorToUse_09 = CorrectedColour("colour_09");
+  RgbColor rgbColorToUse_10 = CorrectedColour("colour_10");
+  RgbColor rgbColorToUse_11 = CorrectedColour("colour_11");
+  RgbColor rgbColorToUse_12 = CorrectedColour("colour_12");
+
+
+  //Switch mode
+     switch (strip) 
+     {
+         case 1:
+            strip_04.SetPixelColor(0,rgbColorToUse_01);
+            strip_04.SetPixelColor(1,rgbColorToUse_02);
+            strip_04.SetPixelColor(2,rgbColorToUse_03);
+            strip_04.SetPixelColor(3,rgbColorToUse_04);
+            strip_04.SetPixelColor(4,rgbColorToUse_05);
+            strip_04.SetPixelColor(5,rgbColorToUse_06);
+            strip_04.SetPixelColor(6,rgbColorToUse_07);
+            strip_04.SetPixelColor(7,rgbColorToUse_08);
+            strip_04.SetPixelColor(8,rgbColorToUse_09);
+            strip_04.SetPixelColor(9,rgbColorToUse_10);
+            strip_04.SetPixelColor(10,rgbColorToUse_11);
+            strip_04.SetPixelColor(11,rgbColorToUse_12);
+          break;
+        case 2:
+            strip_05.SetPixelColor(0,rgbColorToUse_01);
+            strip_05.SetPixelColor(1,rgbColorToUse_02);
+            strip_05.SetPixelColor(2,rgbColorToUse_03);
+            strip_05.SetPixelColor(3,rgbColorToUse_04);
+            strip_05.SetPixelColor(4,rgbColorToUse_05);
+            strip_05.SetPixelColor(5,rgbColorToUse_06);
+            strip_05.SetPixelColor(6,rgbColorToUse_07);
+            strip_05.SetPixelColor(7,rgbColorToUse_08);
+            strip_05.SetPixelColor(8,rgbColorToUse_09);
+            strip_05.SetPixelColor(9,rgbColorToUse_10);
+            strip_05.SetPixelColor(10,rgbColorToUse_11);
+            strip_05.SetPixelColor(11,rgbColorToUse_12);
+          break;
+        case 3:
+            strip_02.SetPixelColor(0,rgbColorToUse_01);
+            strip_02.SetPixelColor(1,rgbColorToUse_02);
+            strip_02.SetPixelColor(2,rgbColorToUse_03);
+            strip_02.SetPixelColor(3,rgbColorToUse_04);
+            strip_02.SetPixelColor(4,rgbColorToUse_05);
+            strip_02.SetPixelColor(5,rgbColorToUse_06);
+            strip_02.SetPixelColor(6,rgbColorToUse_07);
+            strip_02.SetPixelColor(7,rgbColorToUse_08);
+            strip_02.SetPixelColor(8,rgbColorToUse_09);
+            strip_02.SetPixelColor(9,rgbColorToUse_10);
+            strip_02.SetPixelColor(10,rgbColorToUse_11);
+            strip_02.SetPixelColor(11,rgbColorToUse_12);
+          break;
+        case 4:
+            strip_15.SetPixelColor(0,rgbColorToUse_01);
+            strip_15.SetPixelColor(1,rgbColorToUse_02);
+            strip_15.SetPixelColor(2,rgbColorToUse_03);
+            strip_15.SetPixelColor(3,rgbColorToUse_04);
+            strip_15.SetPixelColor(4,rgbColorToUse_05);
+            strip_15.SetPixelColor(5,rgbColorToUse_06);
+            strip_15.SetPixelColor(6,rgbColorToUse_07);
+            strip_15.SetPixelColor(7,rgbColorToUse_08);
+            strip_15.SetPixelColor(8,rgbColorToUse_09);
+            strip_15.SetPixelColor(9,rgbColorToUse_10);
+            strip_15.SetPixelColor(10,rgbColorToUse_11);
+            strip_15.SetPixelColor(11,rgbColorToUse_12);
+          break;
+        case 5:
+            strip_14.SetPixelColor(0,rgbColorToUse_01);
+            strip_14.SetPixelColor(1,rgbColorToUse_02);
+            strip_14.SetPixelColor(2,rgbColorToUse_03);
+            strip_14.SetPixelColor(3,rgbColorToUse_04);
+            strip_14.SetPixelColor(4,rgbColorToUse_05);
+            strip_14.SetPixelColor(5,rgbColorToUse_06);
+            strip_14.SetPixelColor(6,rgbColorToUse_07);
+            strip_14.SetPixelColor(7,rgbColorToUse_08);
+            strip_14.SetPixelColor(8,rgbColorToUse_09);
+            strip_14.SetPixelColor(9,rgbColorToUse_10);
+            strip_14.SetPixelColor(10,rgbColorToUse_11);
+            strip_14.SetPixelColor(11,rgbColorToUse_12);
+          break;
+    }
+
+
+}
+
+//All LEDs in a ring are set to the same colour
 //Single shot mode with no animation
-void Set_Mode_01() {
+//does not clear any LEDS so can be called more than once to 
+//set different rings without affecting any other ring
+void Set_Mode_001() {
 
-  Serial.println("In Mode_01");
+  Serial.println("In Mode_001");
 
-  String rgbStr = server.arg("color");  //get value from color element
-  rgbStr.replace("%23","#"); //%23 = # in URI
-  int rgb[3];                           
-  getRGB(rgbStr,rgb);
+  RgbColor rgbColorToUse = CorrectedColour("colour_001");
 
-  RgbColor rgbColorToUse = RgbColor(gammaCorrect[rgb[0]], gammaCorrect[rgb[1]], gammaCorrect[rgb[2]]); 
-    
-  //RgbColor rgbColorToUse = RgbColor(rgb[0], rgb[1], rgb[2]); 
- 
   for(int i=0; i < pixelCount; i++) 
   {
       strip_04.SetPixelColor(i,rgbColorToUse);
@@ -261,21 +364,17 @@ void Set_Mode_01() {
 }
 
 //Rotating Single LED - Clockwise
-void Set_Mode_02() 
+void Set_Mode_002() 
 {
-  Serial.println("In Mode_02");
+  Serial.println("In Mode_002");
 
-  String rgbStr = server.arg("color");  //get value from color element
-  rgbStr.replace("%23","#"); //%23 = # in URI
-  int rgb[3];                           
-  getRGB(rgbStr,rgb); 
-  RgbColor rgbColorToUse = RgbColor(rgb[0], rgb[1], rgb[2]);
+  RgbColor rgbColorToUse = CorrectedColour("colour_001");
 
   int loopDelay = server.arg("loopdelay").toInt();  //get value from loopdelay element
 
    while(!getNewData) //set when data has been received.  Interupts the display mode.
    {
-    Serial.println("In Mode_02_Loop");
+    Serial.println("In Mode_002_Loop");
     for(int i=0; i < pixelCount; i++) 
     {     
       strip_04.SetPixelColor(i,rgbColorToUse);
@@ -311,26 +410,22 @@ void Set_Mode_02()
         server.handleClient();
     }
   }
-      Serial.println("Mode_02 Cancelled");
+      Serial.println("Mode_002 Cancelled");
 }
 
 
 //Rotating Single LED - Anti-Clockwise
-void Set_Mode_03() 
+void Set_Mode_003() 
 {
-  Serial.println("In Mode_03");
+  Serial.println("In Mode_003");
 
-  String rgbStr = server.arg("color");  //get value from color element
-  rgbStr.replace("%23","#"); //%23 = # in URI
-  int rgb[3];                           
-  getRGB(rgbStr,rgb); 
-  RgbColor rgbColorToUse = RgbColor(rgb[0], rgb[1], rgb[2]);
+  RgbColor rgbColorToUse = CorrectedColour("colour_001");
 
   int loopDelay = server.arg("loopdelay").toInt();  //get value from loopdelay element
 
    while(!getNewData)
    {
-    Serial.println("In Mode_03_Loop");
+    Serial.println("In Mode_003_Loop");
     for(int i=pixelCount-1; i>=0; i--) 
     {     
       strip_04.SetPixelColor(i,rgbColorToUse);
@@ -366,25 +461,21 @@ void Set_Mode_03()
         server.handleClient();
     }
   }
-      Serial.println("Mode_03 Cancelled");
+      Serial.println("Mode_003 Cancelled");
 }
 
 //Rotating Single LED Turned Off - Clockwise
-void Set_Mode_04() 
+void Set_Mode_004() 
 {
-  Serial.println("In Mode_04");
+  Serial.println("In Mode_004");
 
-  String rgbStr = server.arg("color");  //get value from color element
-  rgbStr.replace("%23","#"); //%23 = # in URI
-  int rgb[3];                           
-  getRGB(rgbStr,rgb); 
-  RgbColor rgbColorToUse = RgbColor(rgb[0], rgb[1], rgb[2]);
+  RgbColor rgbColorToUse = CorrectedColour("colour_001");
 
   int loopDelay = server.arg("loopdelay").toInt();  //get value from loopdelay element
 
    while(!getNewData)
    {
-    Serial.println("In Mode_04_Loop");
+    Serial.println("In Mode_004_Loop");
     for(int i=0; i < pixelCount; i++) 
     {     
       strip_04.SetPixelColor(i,rgbBlack);
@@ -420,26 +511,22 @@ void Set_Mode_04()
         server.handleClient();
     }
   }
-      Serial.println("Mode_04 Cancelled");
+      Serial.println("Mode_004 Cancelled");
 }
 
 
 //Rotating Single LED Turned Off - Anti-Clockwise
-void Set_Mode_05() 
+void Set_Mode_005() 
 {
-  Serial.println("In Mode_05");
+  Serial.println("In Mode_005");
 
-  String rgbStr = server.arg("color");  //get value from color element
-  rgbStr.replace("%23","#"); //%23 = # in URI
-  int rgb[3];                           
-  getRGB(rgbStr,rgb); 
-  RgbColor rgbColorToUse = RgbColor(rgb[0], rgb[1], rgb[2]);
+  RgbColor rgbColorToUse = CorrectedColour("colour_001");
 
   int loopDelay = server.arg("loopdelay").toInt();  //get value from loopdelay element
 
    while(!getNewData)
    {
-    Serial.println("In Mode_05_Loop");
+    Serial.println("In Mode_005_Loop");
     for(int i=pixelCount-1; i>=0; i--) 
     {     
         strip_04.SetPixelColor(i,rgbBlack);
@@ -475,25 +562,21 @@ void Set_Mode_05()
         server.handleClient();
     }
   }
-      Serial.println("Mode_05 Cancelled");
+      Serial.println("Mode_005 Cancelled");
 }
 
 //2 Leds moving in anti and clockwise directiions 
-void Set_Mode_06() 
+void Set_Mode_006() 
 {
-  Serial.println("In Mode_06");
+  Serial.println("In Mode_006");
 
-  String rgbStr = server.arg("color");  //get value from color element
-  rgbStr.replace("%23","#"); //%23 = # in URI
-  int rgb[3];                           
-  getRGB(rgbStr,rgb); 
-  RgbColor rgbColorToUse = RgbColor(rgb[0], rgb[1], rgb[2]);
+  RgbColor rgbColorToUse = CorrectedColour("colour_001");
 
   int loopDelay = server.arg("loopdelay").toInt();  //get value from loopdelay element
 
    while(!getNewData)
    {
-    Serial.println("In Mode_06_Loop");
+    Serial.println("In Mode_006_Loop");
     for(int i=0; i < pixelCount; i++) 
     {     
         //Clockwise
@@ -534,7 +617,7 @@ void Set_Mode_06()
         strip_02.SetPixelColor(i180,rgbColorToUse);
         strip_14.SetPixelColor(i180,rgbColorToUse);
 
-              Serial.print("Mode_06 Set");
+              Serial.print("Mode_006 Set");
               Serial.println(i180);
 
         if(i180==pixelCount-1)
@@ -545,7 +628,7 @@ void Set_Mode_06()
           strip_02.SetPixelColor(0,rgbBlack);
           strip_14.SetPixelColor(0,rgbBlack);
 
-          Serial.print("Mode_06 Clear");
+          Serial.print("Mode_006 Clear");
           Serial.println(0);
         }
         else
@@ -556,7 +639,7 @@ void Set_Mode_06()
           strip_02.SetPixelColor(i180+1,rgbBlack);
           strip_14.SetPixelColor(i180+1,rgbBlack);
 
-          Serial.print("Mode_06 Clear");
+          Serial.print("Mode_006 Clear");
           Serial.println(i180+1);
         }
         
@@ -571,44 +654,25 @@ void Set_Mode_06()
         server.handleClient();
     }
   }
-      Serial.println("Mode_06 Cancelled");
+      Serial.println("Mode_006 Cancelled");
 }
 
 
 //Clockwise with trails of 4 LEds
-void Set_Mode_07() 
+void Set_Mode_007() 
 {
-  Serial.println("In Mode_07");
+  Serial.println("In Mode_007");
 
-  String rgbStr_01 = server.arg("color01");  //get value from color element
-  rgbStr_01.replace("%23","#"); //%23 = # in URI
-  int rgb_01[3];                           
-  getRGB(rgbStr_01,rgb_01); 
-  RgbColor rgbColorToUse_01 = RgbColor(rgb_01[0], rgb_01[1], rgb_01[2]);
-
-  String rgbStr_02 = server.arg("color02");  //get value from color element
-  rgbStr_02.replace("%23","#"); //%23 = # in URI
-  int rgb_02[3];                           
-  getRGB(rgbStr_02,rgb_02); 
-  RgbColor rgbColorToUse_02 = RgbColor(rgb_02[0], rgb_02[1], rgb_02[2]);
-
-  String rgbStr_03 = server.arg("color03");  //get value from color element
-  rgbStr_03.replace("%23","#"); //%23 = # in URI
-  int rgb_03[3];                           
-  getRGB(rgbStr_03,rgb_03); 
-  RgbColor rgbColorToUse_03 = RgbColor(rgb_03[0], rgb_03[1], rgb_03[2]);
-
-  String rgbStr_04 = server.arg("color04");  //get value from color element
-  rgbStr_04.replace("%23","#"); //%23 = # in URI
-  int rgb_04[3];                           
-  getRGB(rgbStr_04,rgb_04); 
-  RgbColor rgbColorToUse_04 = RgbColor(rgb_04[0], rgb_04[1], rgb_04[2]);
+  RgbColor rgbColorToUse_01 = CorrectedColour("colour_001");
+  RgbColor rgbColorToUse_02 = CorrectedColour("colour_002");
+  RgbColor rgbColorToUse_03 = CorrectedColour("colour_003");
+  RgbColor rgbColorToUse_04 = CorrectedColour("colour_004");
 
   int loopDelay = server.arg("loopdelay").toInt();  //get value from loopdelay element
 
    while(!getNewData)
    {
-    Serial.println("In Mode_07_Loop");
+    Serial.println("In Mode_007_Loop");
     for(int i=0; i < pixelCount; i++) 
     {     
         //Clockwise
@@ -637,7 +701,7 @@ void Set_Mode_07()
         strip_14.SetPixelColor(ClockMinusOne(ClockMinusOne(i)),rgbColorToUse_03);
         strip_14.SetPixelColor(ClockMinusOne(ClockMinusOne(ClockMinusOne(i))),rgbColorToUse_04);
 
-        Serial.print("Mode_07 Set-");
+        Serial.print("Mode_007 Set-");
         Serial.print(i);
         Serial.print(" - ");
         Serial.println(ClockMinusOne(i));
@@ -650,7 +714,7 @@ void Set_Mode_07()
           strip_02.SetPixelColor(ClockMinusOne(ClockMinusOne(ClockMinusOne(ClockMinusOne(i)))),rgbBlack);
           strip_14.SetPixelColor(ClockMinusOne(ClockMinusOne(ClockMinusOne(ClockMinusOne(i)))),rgbBlack);
 
-          Serial.print("Mode_07 Clear-");
+          Serial.print("Mode_007 Clear-");
           Serial.println(ClockMinusOne(ClockMinusOne(i)));
 
           strip_04.Show();
@@ -663,14 +727,14 @@ void Set_Mode_07()
         server.handleClient();
     }
   }
-      Serial.println("Mode_07 Cancelled");
+      Serial.println("Mode_007 Cancelled");
 }
 
 
 //Both Motors On
-void Set_Mode_08() 
+void Set_Mode_008() 
 {
-  Serial.println("In Mode_08");
+  Serial.println("In Mode_008");
 
   digitalWrite(ledPin_12, HIGH);
 
@@ -678,9 +742,9 @@ void Set_Mode_08()
 }
 
 //Both Motors Off
-void Set_Mode_09() 
+void Set_Mode_009() 
 {
-  Serial.println("In Mode_09");
+  Serial.println("In Mode_009");
 
   digitalWrite(ledPin_12, LOW);
 
@@ -688,15 +752,15 @@ void Set_Mode_09()
 }
 
 //Pulsed motor
-void Set_Mode_10() 
+void Set_Mode_010() 
 {
-  Serial.println("In Mode_10");
+  Serial.println("In Mode_010");
 
   int loopDelay = server.arg("loopdelay").toInt();  //get value from loopdelay element
 
    while(!getNewData)
    {
-    Serial.println("In Mode_10_Loop");
+    Serial.println("In Mode_010_Loop");
    
     digitalWrite(ledPin_12, HIGH);
     digitalWrite(ledPin_13, HIGH);
@@ -708,26 +772,22 @@ void Set_Mode_10()
         
     server.handleClient();
   }
-      Serial.println("Mode_02 Cancelled");
+      Serial.println("Mode_010 Cancelled");
 }
 
 
 //2 Leds moving in anti and clockwise directiions with pulsed motors
-void Set_Mode_11() 
+void Set_Mode_011() 
 {
-  Serial.println("In Mode_11");
+  Serial.println("In Mode_011");
 
-  String rgbStr = server.arg("color");  //get value from color element
-  rgbStr.replace("%23","#"); //%23 = # in URI
-  int rgb[3];                           
-  getRGB(rgbStr,rgb); 
-  RgbColor rgbColorToUse = RgbColor(rgb[0], rgb[1], rgb[2]);
+  RgbColor rgbColorToUse = CorrectedColour("colour_001");
 
   int loopDelay = server.arg("loopdelay").toInt();  //get value from loopdelay element
 
    while(!getNewData)
    {
-    Serial.println("In Mode_11_Loop");
+    Serial.println("In Mode_011_Loop");
     for(int i=0; i < pixelCount; i++) 
     {     
         //Clockwise
@@ -768,7 +828,7 @@ void Set_Mode_11()
         strip_02.SetPixelColor(i180,rgbColorToUse);
         strip_14.SetPixelColor(i180,rgbColorToUse);
 
-              Serial.print("Mode_11 Set");
+              Serial.print("Mode_011 Set");
               Serial.println(i180);
 
         if(i180==pixelCount-1)
@@ -779,7 +839,7 @@ void Set_Mode_11()
           strip_02.SetPixelColor(0,rgbBlack);
           strip_14.SetPixelColor(0,rgbBlack);
 
-          Serial.print("Mode_11 Clear");
+          Serial.print("Mode_011 Clear");
           Serial.println(0);
         }
         else
@@ -790,7 +850,7 @@ void Set_Mode_11()
           strip_02.SetPixelColor(i180+1,rgbBlack);
           strip_14.SetPixelColor(i180+1,rgbBlack);
 
-          Serial.print("Mode_11 Clear");
+          Serial.print("Mode_011 Clear");
           Serial.println(i180+1);
         }
         
@@ -801,15 +861,65 @@ void Set_Mode_11()
           strip_02.Show();
           strip_14.Show();
 
-          Set_Mode_08(); //motors on
+          Set_Mode_008(); //motors on
           delay(loopDelay/2);
-          Set_Mode_09(); //motors off
+          Set_Mode_009(); //motors off
           delay(loopDelay/2);
         
           server.handleClient();
     }
   }
-      Serial.println("Mode_11 Cancelled");
+      Serial.println("Mode_011 Cancelled");
+}
+
+//Rotate between rings, not in a ring
+//Remember channels 4 and 5 are marked incorrectly on the chip
+void Set_Mode_012() 
+{
+  Serial.println("In Mode_012");
+
+  RgbColor rgbColorToUse = CorrectedColour("colour_001");
+
+  int loopDelay = server.arg("loopdelay").toInt();  //get value from loopdelay element
+  
+   ClearAll();
+   while(!getNewData)
+   {
+      Serial.println("In Mode_012_Loop");
+
+      strip_05.SetPixelColor(1,rgbColorToUse);
+      strip_05.Show();
+      delay(loopDelay);
+      strip_05.SetPixelColor(1,rgbBlack);
+      strip_05.Show();
+      
+      strip_04.SetPixelColor(1,rgbColorToUse);
+      strip_04.Show();
+      delay(loopDelay);      
+      strip_04.SetPixelColor(1,rgbBlack);
+      strip_04.Show();
+      
+      strip_15.SetPixelColor(1,rgbColorToUse);
+      strip_15.Show();
+      delay(loopDelay);
+      strip_15.SetPixelColor(1,rgbBlack);
+      strip_15.Show();
+      
+      strip_02.SetPixelColor(1,rgbColorToUse);
+      strip_02.Show();
+      delay(loopDelay);
+      strip_02.SetPixelColor(1,rgbBlack);
+      strip_02.Show();
+      
+      strip_14.SetPixelColor(1,rgbColorToUse);
+      strip_14.Show();
+      delay(loopDelay);
+      strip_14.SetPixelColor(1,rgbBlack);
+      strip_14.Show();
+      
+      server.handleClient();
+  }
+      Serial.println("Mode_012 Cancelled");
 }
 
 /*
@@ -820,6 +930,62 @@ void Set_Mode_11()
 /*
  * Utilities for display
  */
+
+void ClearAll()
+{
+  for(int i=0; i < pixelCount; i++) 
+  {
+      strip_04.SetPixelColor(i,rgbBlack);
+      strip_05.SetPixelColor(i,rgbBlack);
+      strip_15.SetPixelColor(i,rgbBlack);
+      strip_02.SetPixelColor(i,rgbBlack);
+      strip_14.SetPixelColor(i,rgbBlack);
+  }
+
+  strip_04.Show();
+  strip_05.Show(); 
+  strip_15.Show();
+  strip_02.Show();
+  strip_14.Show();
+}
+
+
+//Get the colour values out of the HTML request and adjust for Gamma 
+RgbColor CorrectedColour(String colourParamter)
+{
+  /*
+  Serial.println("In CorrectedColour");
+  Serial.print("--");
+  Serial.print(colourParamter);
+  Serial.println("--");
+   */
+
+  char charColourParamter[colourParamter.length()+1];
+  colourParamter.toCharArray(charColourParamter, colourParamter.length()+1);
+
+  /*
+  Serial.println("Got char");
+  Serial.print("--");
+  Serial.print(charColourParamter);
+  Serial.println("--");;
+   */
+
+  String rgbStr = server.arg(charColourParamter);
+
+  /*
+  Serial.println("Got RGB");
+  Serial.print("--");
+  Serial.print(rgbStr);
+  Serial.println("--");
+   */
+
+  rgbStr.replace("%23","#"); //%23 = # in URI
+  int rgb[3];                           
+  getRGB(rgbStr,rgb); 
+  RgbColor rgbColorToUse = RgbColor(gammaCorrect[rgb[0]], gammaCorrect[rgb[0]], gammaCorrect[rgb[0]]); 
+  return rgbColorToUse;
+}
+
 
 int convertToInt(char upper,char lower)
 {
