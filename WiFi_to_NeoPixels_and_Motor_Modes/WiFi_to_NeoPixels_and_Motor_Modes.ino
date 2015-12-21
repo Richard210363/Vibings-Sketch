@@ -51,8 +51,8 @@ int ledPin_13 = 13;  // Vibrating Motor connected to digital pin 13
 //const char* ssid     = "Hippy-Apple";
 //const char* password = "1wabcdiaatcws13";
 
-const char* ssid     = "Orange-21DF";
-const char* password = "429E5C7F";
+const char* ssid     = "Hippy-Vibing";
+const char* password = "12345678";
 
 //Returns a form with a colour picker.  Not is use but handy for trying out colours
 const char* html = "<html><head><style></style></head>"
@@ -243,8 +243,10 @@ void Set_Mode_000()
   Serial.println("In Mode_000");
 
   int loopDelay = server.arg("loopdelay").toInt();
-  int strip = server.arg("Ring").toInt();
-
+  int ringID = server.arg("ring").toInt();
+  Serial.print("RingID ");
+  Serial.println(ringID);
+  
   RgbColor rgbColorToUse_01 = CorrectedColour("colour_01");
   RgbColor rgbColorToUse_02 = CorrectedColour("colour_02");
   RgbColor rgbColorToUse_03 = CorrectedColour("colour_03");
@@ -260,9 +262,10 @@ void Set_Mode_000()
 
 
   //Switch mode
-     switch (strip) 
+     switch (ringID) 
      {
          case 1:
+                    Serial.println("In Case 1 ");
             strip_04.SetPixelColor(0,rgbColorToUse_01);
             strip_04.SetPixelColor(1,rgbColorToUse_02);
             strip_04.SetPixelColor(2,rgbColorToUse_03);
@@ -275,8 +278,10 @@ void Set_Mode_000()
             strip_04.SetPixelColor(9,rgbColorToUse_10);
             strip_04.SetPixelColor(10,rgbColorToUse_11);
             strip_04.SetPixelColor(11,rgbColorToUse_12);
+            strip_04.Show();
           break;
         case 2:
+                    Serial.println("In Case 1 ");
             strip_05.SetPixelColor(0,rgbColorToUse_01);
             strip_05.SetPixelColor(1,rgbColorToUse_02);
             strip_05.SetPixelColor(2,rgbColorToUse_03);
@@ -289,8 +294,10 @@ void Set_Mode_000()
             strip_05.SetPixelColor(9,rgbColorToUse_10);
             strip_05.SetPixelColor(10,rgbColorToUse_11);
             strip_05.SetPixelColor(11,rgbColorToUse_12);
+            strip_05.Show();
           break;
         case 3:
+                    Serial.println("In Case 1 ");
             strip_02.SetPixelColor(0,rgbColorToUse_01);
             strip_02.SetPixelColor(1,rgbColorToUse_02);
             strip_02.SetPixelColor(2,rgbColorToUse_03);
@@ -303,8 +310,10 @@ void Set_Mode_000()
             strip_02.SetPixelColor(9,rgbColorToUse_10);
             strip_02.SetPixelColor(10,rgbColorToUse_11);
             strip_02.SetPixelColor(11,rgbColorToUse_12);
+            strip_02.Show();
           break;
         case 4:
+                    Serial.println("In Case 1 ");
             strip_15.SetPixelColor(0,rgbColorToUse_01);
             strip_15.SetPixelColor(1,rgbColorToUse_02);
             strip_15.SetPixelColor(2,rgbColorToUse_03);
@@ -317,8 +326,10 @@ void Set_Mode_000()
             strip_15.SetPixelColor(9,rgbColorToUse_10);
             strip_15.SetPixelColor(10,rgbColorToUse_11);
             strip_15.SetPixelColor(11,rgbColorToUse_12);
+            strip_15.Show();
           break;
         case 5:
+                    Serial.println("In Case 1 ");
             strip_14.SetPixelColor(0,rgbColorToUse_01);
             strip_14.SetPixelColor(1,rgbColorToUse_02);
             strip_14.SetPixelColor(2,rgbColorToUse_03);
@@ -331,6 +342,7 @@ void Set_Mode_000()
             strip_14.SetPixelColor(9,rgbColorToUse_10);
             strip_14.SetPixelColor(10,rgbColorToUse_11);
             strip_14.SetPixelColor(11,rgbColorToUse_12);
+            strip_14.Show();           
           break;
     }
 
@@ -971,18 +983,39 @@ RgbColor CorrectedColour(String colourParamter)
    */
 
   String rgbStr = server.arg(charColourParamter);
+  int brightnessModifier = server.arg("brightness").toInt();
+  Serial.println("brightness");
+  Serial.print("--");
+  Serial.print(brightnessModifier);
+  Serial.println("--");
 
-  /*
+
   Serial.println("Got RGB");
   Serial.print("--");
   Serial.print(rgbStr);
   Serial.println("--");
-   */
+
 
   rgbStr.replace("%23","#"); //%23 = # in URI
   int rgb[3];                           
   getRGB(rgbStr,rgb); 
-  RgbColor rgbColorToUse = RgbColor(gammaCorrect[rgb[0]], gammaCorrect[rgb[0]], gammaCorrect[rgb[0]]); 
+
+  Serial.println("Red");
+  Serial.print("--");
+  Serial.print(rgb[0]);
+  Serial.println("--");
+
+  Serial.println("Red+Gamma");
+  Serial.print("--");
+  Serial.print(gammaCorrect[rgb[0]]);
+  Serial.println("--");
+
+    Serial.println("Red+Gamma+bright");
+  Serial.print("--");
+  Serial.print(((gammaCorrect[rgb[0]])/100)*brightnessModifier);
+  Serial.println("--");
+ 
+  RgbColor rgbColorToUse = RgbColor(((gammaCorrect[rgb[0]])/100)*brightnessModifier, ((gammaCorrect[rgb[1]])/100)*brightnessModifier, ((gammaCorrect[rgb[2]])/100)*brightnessModifier); 
   return rgbColorToUse;
 }
 
