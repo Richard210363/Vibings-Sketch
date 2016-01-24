@@ -81,6 +81,21 @@ void setup() {
 
   Serial.print("LED Count : ");
   Serial.println(pixelCount);
+
+  strip_04.Begin();
+  strip_05.Begin();
+  strip_15.Begin();
+  strip_02.Begin();
+  strip_14.Begin(); 
+
+  //Flash LEDs to show connection made
+  DebugLED(0,0,254);
+  delay(1000);
+  DebugLED(0,254,0);
+  delay(1000);
+  DebugLED(254,0,0);
+  delay(1000);
+  DebugLED(100,0,0);
     
  
 //***************WIFI client************************//
@@ -111,11 +126,11 @@ void setup() {
 pinMode(ledPin_12, OUTPUT);
 pinMode(ledPin_13, OUTPUT);
 
-  strip_04.Begin();
-  strip_05.Begin();
-  strip_15.Begin();
-  strip_02.Begin();
-  strip_14.Begin(); 
+//  strip_04.Begin();
+//  strip_05.Begin();
+//  strip_15.Begin();
+//  strip_02.Begin();
+//  strip_14.Begin(); 
 
   //Flash LEDs to show connection made
   DebugLED(254,0,0);
@@ -179,6 +194,9 @@ void loop() {
           break;
         case 12:
           Set_Mode_012();
+          break;
+        case 13:
+          Set_Mode_013();
           break;
     }
   }
@@ -934,6 +952,104 @@ void Set_Mode_012()
       Serial.println("Mode_012 Cancelled");
 }
 
+//Twinkle
+//Set each LED individually
+//Used to help define new modes although can be used as normal mode
+//LEDs are just ON.  No loops
+//There are 60 LEDS
+void Set_Mode_013() 
+{
+  Serial.println("In Mode_013");
+
+  int loopDelay = server.arg("loopdelay").toInt();
+
+  RgbColor rgbColorToUse_01 = CorrectedColour("colour_01");
+
+   ClearAll();
+   while(!getNewData)
+   {
+      strip_04.SetPixelColor(0,CorrectedTwinkleColour("colour_01"));
+      strip_04.SetPixelColor(1,CorrectedTwinkleColour("colour_01"));
+      strip_04.SetPixelColor(2,CorrectedTwinkleColour("colour_01"));
+      strip_04.SetPixelColor(3,CorrectedTwinkleColour("colour_01"));
+      strip_04.SetPixelColor(4,CorrectedTwinkleColour("colour_01"));
+      strip_04.SetPixelColor(5,CorrectedTwinkleColour("colour_01"));
+      strip_04.SetPixelColor(6,CorrectedTwinkleColour("colour_01"));
+      strip_04.SetPixelColor(7,CorrectedTwinkleColour("colour_01"));
+      strip_04.SetPixelColor(8,CorrectedTwinkleColour("colour_01"));
+      strip_04.SetPixelColor(9,CorrectedTwinkleColour("colour_01"));
+      strip_04.SetPixelColor(10,CorrectedTwinkleColour("colour_01"));
+      strip_04.SetPixelColor(11,CorrectedTwinkleColour("colour_01"));
+    
+    
+      strip_05.SetPixelColor(0,CorrectedTwinkleColour("colour_01"));
+      strip_05.SetPixelColor(1,CorrectedTwinkleColour("colour_01"));
+      strip_05.SetPixelColor(2,CorrectedTwinkleColour("colour_01"));
+      strip_05.SetPixelColor(3,CorrectedTwinkleColour("colour_01"));
+      strip_05.SetPixelColor(4,CorrectedTwinkleColour("colour_01"));
+      strip_05.SetPixelColor(5,CorrectedTwinkleColour("colour_01"));
+      strip_05.SetPixelColor(6,CorrectedTwinkleColour("colour_01"));
+      strip_05.SetPixelColor(7,CorrectedTwinkleColour("colour_01"));
+      strip_05.SetPixelColor(8,CorrectedTwinkleColour("colour_01"));
+      strip_05.SetPixelColor(9,CorrectedTwinkleColour("colour_01"));
+      strip_05.SetPixelColor(10,CorrectedTwinkleColour("colour_01"));
+      strip_05.SetPixelColor(11,CorrectedTwinkleColour("colour_01"));
+    
+    
+      strip_02.SetPixelColor(0,CorrectedTwinkleColour("colour_01"));
+      strip_02.SetPixelColor(1,CorrectedTwinkleColour("colour_01"));
+      strip_02.SetPixelColor(2,CorrectedTwinkleColour("colour_01"));
+      strip_02.SetPixelColor(3,CorrectedTwinkleColour("colour_01"));
+      strip_02.SetPixelColor(4,CorrectedTwinkleColour("colour_01"));
+      strip_02.SetPixelColor(5,CorrectedTwinkleColour("colour_01"));
+      strip_02.SetPixelColor(6,CorrectedTwinkleColour("colour_01"));
+      strip_02.SetPixelColor(7,CorrectedTwinkleColour("colour_01"));
+      strip_02.SetPixelColor(8,CorrectedTwinkleColour("colour_01"));
+      strip_02.SetPixelColor(9,CorrectedTwinkleColour("colour_01"));
+      strip_02.SetPixelColor(10,CorrectedTwinkleColour("colour_01"));
+      strip_02.SetPixelColor(11,CorrectedTwinkleColour("colour_01"));
+    
+    
+      strip_15.SetPixelColor(0,CorrectedTwinkleColour("colour_01"));
+      strip_15.SetPixelColor(1,CorrectedTwinkleColour("colour_01"));
+      strip_15.SetPixelColor(2,CorrectedTwinkleColour("colour_01"));
+      strip_15.SetPixelColor(3,CorrectedTwinkleColour("colour_01"));
+      strip_15.SetPixelColor(4,CorrectedTwinkleColour("colour_01"));
+      strip_15.SetPixelColor(5,CorrectedTwinkleColour("colour_01"));
+      strip_15.SetPixelColor(6,CorrectedTwinkleColour("colour_01"));
+      strip_15.SetPixelColor(7,CorrectedTwinkleColour("colour_01"));
+      strip_15.SetPixelColor(8,CorrectedTwinkleColour("colour_01"));
+      strip_15.SetPixelColor(9,CorrectedTwinkleColour("colour_01"));
+      strip_15.SetPixelColor(10,CorrectedTwinkleColour("colour_01"));
+      strip_15.SetPixelColor(11,CorrectedTwinkleColour("colour_01"));
+    
+    
+      strip_14.SetPixelColor(0,CorrectedTwinkleColour("colour_01"));
+      strip_14.SetPixelColor(1,CorrectedTwinkleColour("colour_01"));
+      strip_14.SetPixelColor(2,CorrectedTwinkleColour("colour_01"));
+      strip_14.SetPixelColor(3,CorrectedTwinkleColour("colour_01"));
+      strip_14.SetPixelColor(4,CorrectedTwinkleColour("colour_01"));
+      strip_14.SetPixelColor(5,CorrectedTwinkleColour("colour_01"));
+      strip_14.SetPixelColor(6,CorrectedTwinkleColour("colour_01"));
+      strip_14.SetPixelColor(7,CorrectedTwinkleColour("colour_01"));
+      strip_14.SetPixelColor(8,CorrectedTwinkleColour("colour_01"));
+      strip_14.SetPixelColor(9,CorrectedTwinkleColour("colour_01"));
+      strip_14.SetPixelColor(10,CorrectedTwinkleColour("colour_01"));
+      strip_14.SetPixelColor(11,CorrectedTwinkleColour("colour_01"));
+    
+      strip_04.Show();
+      strip_05.Show();
+      strip_02.Show();
+      strip_15.Show();
+      strip_14.Show(); 
+
+      delay(loopDelay);
+      server.handleClient();
+   }          
+
+}
+
+
 /*
  * End Display modes
  */
@@ -965,22 +1081,22 @@ void ClearAll()
 //Get the colour values out of the HTML request and adjust for Gamma 
 RgbColor CorrectedColour(String colourParamter)
 {
-  /*
+  
   Serial.println("In CorrectedColour");
   Serial.print("--");
   Serial.print(colourParamter);
   Serial.println("--");
-   */
+  
 
   char charColourParamter[colourParamter.length()+1];
   colourParamter.toCharArray(charColourParamter, colourParamter.length()+1);
 
-  /*
+  
   Serial.println("Got char");
   Serial.print("--");
   Serial.print(charColourParamter);
   Serial.println("--");;
-   */
+  
 
   String rgbStr = server.arg(charColourParamter);
   int brightnessModifier = server.arg("brightness").toInt();
@@ -989,12 +1105,10 @@ RgbColor CorrectedColour(String colourParamter)
   Serial.print(brightnessModifier);
   Serial.println("--");
 
-
   Serial.println("Got RGB");
   Serial.print("--");
   Serial.print(rgbStr);
   Serial.println("--");
-
 
   rgbStr.replace("%23","#"); //%23 = # in URI
   int rgb[3];                           
@@ -1005,17 +1119,132 @@ RgbColor CorrectedColour(String colourParamter)
   Serial.print(rgb[0]);
   Serial.println("--");
 
-  Serial.println("Red+Gamma");
+  Serial.println("Green");
   Serial.print("--");
-  Serial.print(gammaCorrect[rgb[0]]);
+  Serial.print(rgb[1]);
   Serial.println("--");
 
-    Serial.println("Red+Gamma+bright");
+  Serial.println("Blue");
   Serial.print("--");
-  Serial.print(((gammaCorrect[rgb[0]])/100)*brightnessModifier);
+  Serial.print(rgb[2]);
   Serial.println("--");
- 
-  RgbColor rgbColorToUse = RgbColor(((gammaCorrect[rgb[0]])/100)*brightnessModifier, ((gammaCorrect[rgb[1]])/100)*brightnessModifier, ((gammaCorrect[rgb[2]])/100)*brightnessModifier); 
+
+//  Serial.println("Red+Gamma");
+//  Serial.print("--");
+//  Serial.print(gammaCorrect[rgb[0]]);
+//  Serial.println("--");
+//
+//  Serial.println("Red+Gamma+Brightness");
+//  Serial.print("--");
+//  Serial.print(((gammaCorrect[rgb[0]])/100)*brightnessModifier);
+//  Serial.println("--");
+
+  int red = round((((rgb[0]*100)/100)*brightnessModifier)/100);
+  int green = round((((rgb[1]*100)/100)*brightnessModifier)/100);
+  int blue = round((((rgb[2]*100)/100)*brightnessModifier)/100);
+
+  Serial.println("Red+Brightness");
+  Serial.print("--");
+  Serial.print(red);
+  Serial.println("--");
+
+  Serial.println("Green+Brightness");
+  Serial.print("--");
+  Serial.print(green);
+  Serial.println("--");
+
+  Serial.println("Blue+Brightness");
+  Serial.print("--");
+  Serial.print(blue);
+  Serial.println("--");
+
+  RgbColor rgbColorToUse = RgbColor(red,green,blue); 
+  
+  return rgbColorToUse;
+}
+
+//Get the colour values out of the HTML request and adjust for Gamma 
+//Slightly changes the colour for  Twinkle affect
+RgbColor CorrectedTwinkleColour(String colourParamter)
+{
+
+  Serial.println("In CorrectedTwinkleColour");
+  Serial.print("--");
+  Serial.print(colourParamter);
+  Serial.println("--");
+
+  char charColourParamter[colourParamter.length()+1];
+  colourParamter.toCharArray(charColourParamter, colourParamter.length()+1);
+
+  
+  Serial.println("Got char");
+  Serial.print("--");
+  Serial.print(charColourParamter);
+  Serial.println("--");
+  
+  int brightnessModifier = server.arg("brightness").toInt();
+  Serial.println("brightness");
+  Serial.print("--");
+  Serial.print(brightnessModifier);
+  Serial.println("--");
+
+//  String rgbStr = server.arg(charColourParamter);
+  String rgbStr = server.arg("colour_001");
+  Serial.println("Got RGB");
+  Serial.print("--");
+  Serial.print(rgbStr);
+  Serial.println("--");
+
+  rgbStr.replace("%23","#"); //%23 = # in URI
+  int rgb[3];                           
+  getRGB(rgbStr,rgb); 
+
+  Serial.println("Red");
+  Serial.print("--");
+  Serial.print(rgb[0]);
+  Serial.println("--");
+
+  Serial.println("Green");
+  Serial.print("--");
+  Serial.print(rgb[1]);
+  Serial.println("--");
+
+  Serial.println("Blue");
+  Serial.print("--");
+  Serial.print(rgb[2]);
+  Serial.println("--");
+
+//  Serial.println("Red+Gamma");
+//  Serial.print("--");
+//  Serial.print(gammaCorrect[rgb[0]]);
+//  Serial.println("--");
+//
+//  Serial.println("Red+Gamma+Brightness");
+//  Serial.print("--");
+//  Serial.print(((gammaCorrect[rgb[0]])/100)*brightnessModifier);
+//  Serial.println("--");
+
+  int red = round((((rgb[0]*100)/100)*brightnessModifier)/100)+random(10)-random(10);
+  int green = round((((rgb[1]*100)/100)*brightnessModifier)/100)+random(10)-random(10);;
+  int blue = round((((rgb[2]*100)/100)*brightnessModifier)/100)+random(10)-random(10);;
+
+  Serial.println("Red+Brightness");
+  Serial.print("--");
+  Serial.print(red);
+  Serial.println("--");
+
+  Serial.println("Green+Brightness");
+  Serial.print("--");
+  Serial.print(green);
+  Serial.println("--");
+
+  Serial.println("Blue+Brightness");
+  Serial.print("--");
+  Serial.print(blue);
+  Serial.println("--");
+
+  RgbColor rgbColorToUse = RgbColor(red,green,blue); 
+  
   return rgbColorToUse;
 }
 
