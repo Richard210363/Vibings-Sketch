@@ -234,6 +234,15 @@ void loop() {
         case 19:
           Set_Mode_019();
           break;
+        case 20:
+          Set_Mode_020();
+          break;
+        case 21:
+          Set_Mode_021();
+          break;
+        case 22:
+          Set_Mode_022();
+          break;
     }
   }
 }
@@ -2182,6 +2191,126 @@ void Set_Mode_019() {
   Serial.println("Mode_019 Cancelled");
 }
 
+//All LEDs are set to the same colour
+//Red part of colour Colour should change over time but be close to original colour
+void Set_Mode_020() {
+
+  Serial.println("In Mode_020");
+
+  int loopDelay = server.arg("loopdelay").toInt();
+  int variation = server.arg("variation").toInt();
+  int brightnessModifier = server.arg("brightness").toInt();
+
+  int rgb[3];
+  GetColourAsRGBArray("colour_001", rgb);
+
+   while(!getNewData) //set when data has been received.  Interupts the display mode.
+   {
+      Serial.println("In Mode_020_Loop");
+      RgbColor rgbColorToUse = TwinkleRed(rgb , variation, brightnessModifier);
+
+      for(int i=0; i < pixelCount; i++) 
+      {
+          strip_04.SetPixelColor(i,rgbColorToUse);
+          strip_05.SetPixelColor(i,rgbColorToUse);
+          strip_15.SetPixelColor(i,rgbColorToUse);
+          strip_02.SetPixelColor(i,rgbColorToUse);
+          strip_14.SetPixelColor(i,rgbColorToUse);
+      }
+
+      strip_04.Show();
+      strip_05.Show(); 
+      strip_15.Show();
+      strip_02.Show();
+      strip_14.Show();
+    
+      delay(loopDelay);
+
+      server.handleClient();
+  }
+  Serial.println("Mode_020 Cancelled");
+}
+
+//All LEDs are set to the same colour
+//Red part of colour Colour should change over time but be close to original colour
+void Set_Mode_021() {
+
+  Serial.println("In Mode_021");
+
+  int loopDelay = server.arg("loopdelay").toInt();
+  int variation = server.arg("variation").toInt();
+  int brightnessModifier = server.arg("brightness").toInt();
+
+  int rgb[3];
+  GetColourAsRGBArray("colour_001", rgb);
+
+   while(!getNewData) //set when data has been received.  Interupts the display mode.
+   {
+      Serial.println("In Mode_021_Loop");
+      RgbColor rgbColorToUse = TwinkleGreen(rgb , variation, brightnessModifier);
+
+      for(int i=0; i < pixelCount; i++) 
+      {
+          strip_04.SetPixelColor(i,rgbColorToUse);
+          strip_05.SetPixelColor(i,rgbColorToUse);
+          strip_15.SetPixelColor(i,rgbColorToUse);
+          strip_02.SetPixelColor(i,rgbColorToUse);
+          strip_14.SetPixelColor(i,rgbColorToUse);
+      }
+
+      strip_04.Show();
+      strip_05.Show(); 
+      strip_15.Show();
+      strip_02.Show();
+      strip_14.Show();
+    
+      delay(loopDelay);
+
+      server.handleClient();
+  }
+  Serial.println("Mode_021 Cancelled");
+}
+
+//All LEDs are set to the same colour
+//Red part of colour Colour should change over time but be close to original colour
+void Set_Mode_022() {
+
+  Serial.println("In Mode_022");
+
+  int loopDelay = server.arg("loopdelay").toInt();
+  int variation = server.arg("variation").toInt();
+  int brightnessModifier = server.arg("brightness").toInt();
+
+  int rgb[3];
+  GetColourAsRGBArray("colour_001", rgb);
+
+   while(!getNewData) //set when data has been received.  Interupts the display mode.
+   {
+      Serial.println("In Mode_022_Loop");
+      RgbColor rgbColorToUse = TwinkleBlue(rgb , variation, brightnessModifier);
+
+      for(int i=0; i < pixelCount; i++) 
+      {
+          strip_04.SetPixelColor(i,rgbColorToUse);
+          strip_05.SetPixelColor(i,rgbColorToUse);
+          strip_15.SetPixelColor(i,rgbColorToUse);
+          strip_02.SetPixelColor(i,rgbColorToUse);
+          strip_14.SetPixelColor(i,rgbColorToUse);
+      }
+
+      strip_04.Show();
+      strip_05.Show(); 
+      strip_15.Show();
+      strip_02.Show();
+      strip_14.Show();
+    
+      delay(loopDelay);
+
+      server.handleClient();
+  }
+  Serial.println("Mode_022 Cancelled");
+}
+
 /*
  * End Display modes
  */
@@ -2311,6 +2440,62 @@ RgbColor TwinkleColour(int rgb[], int variation, int brightnessModifier)
   int blueTwinkle = (rgb[2]+random(variation)-random(variation));
   int red = round((((redTwinkle*100)/100)*brightnessModifier)/100);
   int green = round((((greenTwinkle*100)/100)*brightnessModifier)/100);
+  int blue = round((((blueTwinkle*100)/100)*brightnessModifier)/100);
+
+  RgbColor rgbColorToUse = RgbColor(red,green,blue); 
+  return rgbColorToUse;
+} 
+
+//Randomly change red colour by a fixed point around a fixed colour
+RgbColor TwinkleRed(int rgb[], int variation, int brightnessModifier)
+{
+  int redTwinkle = (rgb[0]+random(variation)-random(variation));
+  int red = round((((redTwinkle*100)/100)*brightnessModifier)/100); 
+  int green = round((((rgb[1]*100)/100)*brightnessModifier)/100);
+  int blue = round((((rgb[2]*100)/100)*brightnessModifier)/100);
+
+  RgbColor rgbColorToUse = RgbColor(red,green,blue); 
+  return rgbColorToUse;
+} 
+
+//Randomly change green colour by a fixed point around a fixed colour
+RgbColor TwinkleGreen(int rgb[], int variation, int brightnessModifier)
+{
+  Serial.print("--");
+  Serial.print("red");
+  Serial.println(rgb[0]);
+  Serial.print("green");
+  Serial.println(rgb[1]);
+  Serial.print("blue");
+  Serial.println(rgb[2]);
+  Serial.println("--");
+
+  
+  int greenTwinkle = (rgb[1]+random(variation)-random(variation));
+  int red = round((((rgb[0]*100)/100)*brightnessModifier)/100);
+  int green = round((((greenTwinkle*100)/100)*brightnessModifier)/100);
+  int blue = round((((rgb[2]*100)/100)*brightnessModifier)/100);
+
+  Serial.print("--");
+  
+  Serial.print("after red");
+  Serial.println(red);
+  Serial.print("after green");
+  Serial.println(green);
+  Serial.print("after blue");
+  Serial.println(blue);
+  Serial.println("--");
+
+  RgbColor rgbColorToUse = RgbColor(red,green,blue); 
+  return rgbColorToUse;
+}
+
+//Randomly change blue colour by a fixed point around a fixed colour 
+RgbColor TwinkleBlue(int rgb[], int variation, int brightnessModifier)
+{
+  int blueTwinkle = (rgb[2]+random(variation)-random(variation));
+  int red = round((((rgb[0]*100)/100)*brightnessModifier)/100);
+  int green = round((((rgb[1]*100)/100)*brightnessModifier)/100);
   int blue = round((((blueTwinkle*100)/100)*brightnessModifier)/100);
 
   RgbColor rgbColorToUse = RgbColor(red,green,blue); 
