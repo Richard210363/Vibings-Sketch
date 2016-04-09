@@ -51,8 +51,11 @@ int comms_LED = 01;
 //const char* ssid     = "Hippy-Apple";
 //const char* password = "1wabcdiaatcws13";
 
-const char* ssid     = "Hippy-Vibing";
-const char* password = "12345678";
+//const char* ssid     = "Hippy-Vibing";
+//const char* password = "12345678";
+
+const char* ssid     = "MOVISTAR_927E";
+const char* password = "Urn60gBG5mYpcgvtIypJ";
 
 //Returns a form with a colour picker.  Not in use anymore but handy for trying out colours
 const char* html = "<html><head><style></style></head>"
